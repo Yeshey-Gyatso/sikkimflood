@@ -1,6 +1,7 @@
 "use client";
 import React from 'react'
 import { useState,useEffect } from 'react';
+import fs from 'fs';
 
 const Inquiry = () => {
 
@@ -9,6 +10,31 @@ const Inquiry = () => {
     const [phone,setPhone]=useState<string>("");
     const [email,setEmail]=useState<string>("");
     const [message,setMessage]=useState<string>("");
+
+    const Submit = (e) => {
+        e.preventDefault();
+    
+        const formData = {
+          name,
+          location,
+          phone,
+          email,
+          message,
+        };
+
+          // Convert the form data to JSON
+    const jsonData = JSON.stringify(formData, null, 2);
+
+    // Write the JSON data to the text.json file
+    fs.writeFileSync('text.json', jsonData, 'utf8');
+
+    // Reset the form fields after submission
+    setName('');
+    setLocation('');
+    setPhone('');
+    setEmail('');
+    setMessage('');
+  };
 
      
       
@@ -20,7 +46,9 @@ const Inquiry = () => {
     Please fill the form below 
   </div>
 
-  <div className="grid grid-cols-2 gap-4 max-w-xl m-auto">
+  <form
+  onSubmit={Submit}
+  className="grid grid-cols-2 gap-4 max-w-xl m-auto">
 
     <div className="col-span-2 lg:col-span-1">
       <input type="text" 
@@ -57,13 +85,15 @@ const Inquiry = () => {
     </div>
 
     <div className="col-span-2 text-right">
-      <button className="py-3 px-6 bg-green-500 text-white font-bold w-full sm:w-32">
+      <button 
+      type="submit"
+      className="py-3 px-6 bg-green-500 text-white font-bold w-full sm:w-32">
         Submit
       </button>
     </div>
 
 
-  </div>
+  </form>
  
 </div>
   )
