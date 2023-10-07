@@ -6,15 +6,11 @@ const Inquiry = () => {
 
     const [name,setName]=useState<string>("");
     const [location,setLocation]=useState<string>("");
-    const [phone,setPhone]=useState<number>();
+    const [phone,setPhone]=useState<string>("");
     const [email,setEmail]=useState<string>("");
     const [message,setMessage]=useState<string>("");
 
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-      };
-    
+     
       
 
   return (
@@ -39,21 +35,25 @@ const Inquiry = () => {
       required 
       className="border-solid border-gray-400 border-2 p-3 md:text-xl w-full" placeholder="Last known location"/>
     </div>
-    
+
     <div className="col-span-2 lg:col-span-1">
       <input type="number" 
+      onChange={(e)=>{setPhone(e.target.value)}}
       required 
       className="border-solid border-gray-400 border-2 p-3 md:text-xl w-full" placeholder="phone"/>
     </div>
 
     <div className="col-span-2 lg:col-span-1">
-      <input type="text" 
+      <input type="email" 
+      onChange={(e)=>{setEmail(e.target.value)}}
       required 
       className="border-solid border-gray-400 border-2 p-3 md:text-xl w-full" placeholder="Email Address"/>
     </div>
 
     <div className="col-span-2">
-      <textarea cols={30} rows={8} className="border-solid border-gray-400 border-2 p-3 md:text-xl w-full" placeholder="Message"></textarea>
+      <textarea cols={30} rows={8}
+      onChange={(e)=>{setMessage(e.target.value)}}
+      className="border-solid border-gray-400 border-2 p-3 md:text-xl w-full" placeholder="Message"></textarea>
     </div>
 
     <div className="col-span-2 text-right">
@@ -62,7 +62,9 @@ const Inquiry = () => {
       </button>
     </div>
 
+
   </div>
+ 
 </div>
   )
 }
